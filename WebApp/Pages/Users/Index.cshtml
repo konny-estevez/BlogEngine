@@ -1,0 +1,115 @@
+﻿@page
+@model WebApp.Pages.Users.IndexModel
+
+@{
+    ViewData["Title"] = "Users List";
+}
+
+<h1>Users List</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+@Model.ErrorMessage
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Email)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Address)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Birthday)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].City)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].Country)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].MobilePhone)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].PhoneNumber)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].PostalCode)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].State)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].IsActive)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Users[0].UpdatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Users) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Address)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Birthday)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.City)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Country)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.MobilePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PhoneNumber)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PostalCode)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.State)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td width="200px">
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

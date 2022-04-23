@@ -1,0 +1,90 @@
+﻿@page
+@model WebApp.Pages.Posts.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Posts List</h1>
+@if (HttpContext.Request.Cookies.FirstOrDefault(x => x.Key == "role").Value.Equals("Writer"))
+{
+    <p> <a asp-page="Create">Create New</a> </p>
+}
+@Model.ErrorMessage
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].Content)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].StateDescription)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].UserId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].UserName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].FullName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].CreatedDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Posts[0].UpdatedDate)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Posts) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Content)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.StateDescription)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FullName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CreatedDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.UpdatedDate)
+            </td>
+            <td width="100px">
+                @if (HttpContext.Request.Cookies.FirstOrDefault(x => x.Key == "role").Value.Equals("Writer")) 
+                {
+                    <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> <span>|</span>
+                    <a asp-page="./Submit" asp-route-id="@item.Id">Submit</a> <span>|</span>
+                    <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+                }
+                else if (HttpContext.Request.Cookies.FirstOrDefault(x => x.Key == "role").Value.Equals("Public"))
+                {
+                    <a asp-page="./Details" asp-route-id="@item.Id">Details</a> 
+                }
+                else if (HttpContext.Request.Cookies.FirstOrDefault(x => x.Key == "role").Value.Equals("Editor")) 
+                {
+                    <a asp-page="./Approve" asp-route-id="@item.Id">Approve</a> 
+                }
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

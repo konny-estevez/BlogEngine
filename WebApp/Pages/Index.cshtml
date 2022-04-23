@@ -1,0 +1,17 @@
+﻿@page
+@model WebApp.Pages.IndexModel
+@{
+    ViewData["Title"] = "Blob Engine";
+}
+<div class="text-center align-content-center" style="width:500px">
+    <h1 class="display-4">Blog Engine</h1>
+    <br />
+    <p>Do you have an account?</p>
+    <p><a asp-page="./Login">Login</a></p>
+    <br />
+    <p>
+        Don't have an account?
+        <a asp-page="./Users/Create">Register</a>
+    </p>
+</div>
+

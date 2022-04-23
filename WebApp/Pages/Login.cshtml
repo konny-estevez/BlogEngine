@@ -1,0 +1,29 @@
+﻿@page
+@model LoginModel
+@{
+    ViewData["Title"] = "Login page";
+}
+
+<div class="text-center align-content-center" style="width:500px">
+    <h1 class="display-4">Blog Engine</h1>
+<form method="post" >
+  <div class="form-group">
+    <label for="exampleInputEmail1">Email address</label>
+    <input type="email" name="Email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" required>
+    @*@Html.EditorFor(m => m.Email)*@
+    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+  </div>
+  <div class="form-group">
+    <label for="exampleInputPassword1">Password</label>
+    <input type="password" name="Password" class="form-control" id="exampleInputPassword1" placeholder="Password" required>
+    @*@Html.EditorFor(m => m.Password)*@
+  </div>
+  <div class="form-check">
+    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+  </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
+<br /><br />
+<div class="text-danger">@Model.ErrorMessage</div>
+</div>
