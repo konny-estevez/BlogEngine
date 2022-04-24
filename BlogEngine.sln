@@ -12,9 +12,13 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql Scripts", "Sql Scripts", "{44BCB9B4-D690-45E9-B2A6-88B27C387FB2}"
 	ProjectSection(SolutionItems) = preProject
 		SqlScripts\Database.sql = SqlScripts\Database.sql
+		MySqlDatabase.sql = MySqlDatabase.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9BA06AA9-F2D5-4BFF-977D-071B4F16D691}"
+	ProjectSection(SolutionItems) = preProject
+		README.md = README.md
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Entities", "Entities\Entities.csproj", "{A55FFE48-2A1D-478C-B5B7-F7C8219D77A5}"
 EndProject

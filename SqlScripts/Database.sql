@@ -74,12 +74,12 @@ ALTER DATABASE [BlogEngine] SET QUERY_STORE = OFF
 GO
 USE [BlogEngine]
 GO
-/****** Object:  User [BlogEngineUser]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  User [BlogEngineUser]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE USER [BlogEngineUser] FOR LOGIN [BlogEngineUser] WITH DEFAULT_SCHEMA=[dbo]
 GO
 ALTER ROLE [db_owner] ADD MEMBER [BlogEngineUser]
 GO
-/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[__EFMigrationsHistory]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -93,7 +93,7 @@ CREATE TABLE [dbo].[__EFMigrationsHistory](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetRoleClaims]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetRoleClaims]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -109,7 +109,7 @@ CREATE TABLE [dbo].[AspNetRoleClaims](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetRoles]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -125,7 +125,7 @@ CREATE TABLE [dbo].[AspNetRoles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetUserClaims]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -141,7 +141,7 @@ CREATE TABLE [dbo].[AspNetUserClaims](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetUserLogins]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -158,7 +158,7 @@ CREATE TABLE [dbo].[AspNetUserLogins](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetUserRoles]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -173,13 +173,25 @@ CREATE TABLE [dbo].[AspNetUserRoles](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetUsers]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
 GO
 CREATE TABLE [dbo].[AspNetUsers](
 	[Id] [nvarchar](450) NOT NULL,
+	[Discriminator] [nvarchar](max) NOT NULL,
+	[CreatedDate] [datetime2](7) NULL,
+	[UpdatedDate] [datetime2](7) NULL,
+	[FirstName] [nvarchar](60) NULL,
+	[LastName] [nvarchar](60) NULL,
+	[Birthday] [datetime2](7) NULL,
+	[Address] [nvarchar](150) NULL,
+	[City] [nvarchar](50) NULL,
+	[State] [nvarchar](35) NULL,
+	[Country] [nvarchar](35) NULL,
+	[PostalCode] [nvarchar](10) NULL,
+	[MobilePhone] [nvarchar](20) NULL,
 	[UserName] [nvarchar](256) NULL,
 	[NormalizedUserName] [nvarchar](256) NULL,
 	[Email] [nvarchar](256) NULL,
@@ -194,25 +206,13 @@ CREATE TABLE [dbo].[AspNetUsers](
 	[LockoutEnd] [datetimeoffset](7) NULL,
 	[LockoutEnabled] [bit] NOT NULL,
 	[AccessFailedCount] [int] NOT NULL,
-	[Address] [nvarchar](150) NULL,
-	[Birthday] [datetime2](7) NULL,
-	[City] [nvarchar](50) NULL,
-	[Country] [nvarchar](35) NULL,
-	[CreatedDate] [datetime2](7) NULL,
-	[Discriminator] [nvarchar](max) NOT NULL,
-	[FirstName] [nvarchar](60) NULL,
-	[LastName] [nvarchar](60) NULL,
-	[MobilePhone] [nvarchar](20) NULL,
-	[PostalCode] [nvarchar](10) NULL,
-	[State] [nvarchar](35) NULL,
-	[UpdatedDate] [datetime2](7) NULL,
  CONSTRAINT [PK_AspNetUsers] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[AspNetUserTokens]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[AspNetUserTokens]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -230,7 +230,7 @@ CREATE TABLE [dbo].[AspNetUserTokens](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Comments]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[Comments]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -240,16 +240,16 @@ CREATE TABLE [dbo].[Comments](
 	[Content] [nvarchar](1024) NOT NULL,
 	[FromRejectedPost] [bit] NOT NULL,
 	[PostId] [uniqueidentifier] NOT NULL,
+	[UserId] [nvarchar](max) NOT NULL,
 	[CreatedDate] [datetime2](7) NOT NULL,
 	[UpdatedDate] [datetime2](7) NULL,
-	[UserId] [nvarchar](max) NOT NULL,
  CONSTRAINT [PK_Comments] PRIMARY KEY CLUSTERED 
 (
 	[Id] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
 GO
-/****** Object:  Table [dbo].[Posts]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Table [dbo].[Posts]    Script Date: 23/4/2022 16:51:22 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -260,7 +260,7 @@ CREATE TABLE [dbo].[Posts](
 	[Content] [nvarchar](1024) NOT NULL,
 	[State] [int] NOT NULL,
 	[PublishedDate] [datetime2](7) NULL,
-	[UserId] [uniqueidentifier] NOT NULL,
+	[UserId] [nvarchar](450) NOT NULL,
 	[CreatedDate] [datetime2](7) NOT NULL,
 	[UpdatedDate] [datetime2](7) NULL,
  CONSTRAINT [PK_Posts] PRIMARY KEY CLUSTERED 
@@ -269,33 +269,37 @@ CREATE TABLE [dbo].[Posts](
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 ) ON [PRIMARY]
 GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'7c1897e0-89e0-4d2b-a972-8406d1f2dfc9', N'Editor', N'EDITOR', N'637862693066407647')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220423050506_InitialMigration', N'6.0.4')
 GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'8667659a-8dbb-4834-aa08-cb76cc6adbc1', N'Public', N'PUBLIC', N'637862693066332162')
+INSERT [dbo].[__EFMigrationsHistory] ([MigrationId], [ProductVersion]) VALUES (N'20220423155911_UpdatePostEntity', N'6.0.4')
 GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'aef5384f-da24-4e84-8dee-e26c0a6ec5d2', N'Admin', N'ADMIN', N'637862693065931197')
+INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'7522447b-8033-476b-b340-e3512a5aae1e', N'Public', N'PUBLIC', N'637863141491819516')
 GO
-INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'c78c121b-5987-4ada-8390-092aaa0be926', N'Writer', N'WRITER', N'637862693066373877')
+INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'87640dd5-89a8-483b-8895-d3fbaa791e25', N'Writer', N'WRITER', N'637863141491865495')
 GO
-INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'5db5d763-9197-4caf-b12d-981d92ab08e9', N'7c1897e0-89e0-4d2b-a972-8406d1f2dfc9')
+INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'a6430aae-0ac2-4080-9b2a-2c17b532b8aa', N'Editor', N'EDITOR', N'637863141491910834')
 GO
-INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'4b7231e9-179c-48dc-aba9-1f5ca1201c5b', N'8667659a-8dbb-4834-aa08-cb76cc6adbc1')
+INSERT [dbo].[AspNetRoles] ([Id], [Name], [NormalizedName], [ConcurrencyStamp]) VALUES (N'c19e8d58-6852-48a6-ba76-a2afcec5bbae', N'Admin', N'ADMIN', N'637863141491326160')
 GO
-INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'465ae734-0b94-4cbe-a77d-a7f3220e6cb1', N'aef5384f-da24-4e84-8dee-e26c0a6ec5d2')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'c58cfa54-819b-41bd-81da-ff671b9504e4', N'7522447b-8033-476b-b340-e3512a5aae1e')
 GO
-INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'5d6148ab-9226-4d54-9229-83af8f5986e5', N'c78c121b-5987-4ada-8390-092aaa0be926')
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'e8c7d071-68b0-416e-9251-645557e49582', N'87640dd5-89a8-483b-8895-d3fbaa791e25')
 GO
-INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'465ae734-0b94-4cbe-a77d-a7f3220e6cb1', N'User', CAST(N'2022-04-23T00:16:24.2042671' AS DateTime2), NULL, N'Admin', N'User', CAST(N'2000-01-01T00:00:00.0000000' AS DateTime2), N'Admin address', N'.', N'.', N'.', N'.', N'123456', N'admin@blog.net', N'ADMIN@BLOG.NET', N'admin@blog.net', N'ADMIN@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEOp6B0Is6KVczFeJedP+SSCfJqTk8aH2KCBEmYSlC9yFl5WGP376jFqJIiduoF5G1w==', N'W4VNTOK6N4KCYJKCLQYJ3MS7KJVGPFIJ', N'66b959ba-8a79-4533-9270-a432310d424e', N'123456', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'7b29b2f9-c7b9-443c-8622-169cf756ba03', N'a6430aae-0ac2-4080-9b2a-2c17b532b8aa')
 GO
-INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'4b7231e9-179c-48dc-aba9-1f5ca1201c5b', N'User', CAST(N'2022-04-23T00:32:48.6380635' AS DateTime2), CAST(N'2022-04-23T00:36:53.3071392' AS DateTime2), N'Public', N'User', CAST(N'2000-01-01T00:00:00.0000000' AS DateTime2), N'Public address', N'.', N'.', N'.', N'.', N'123456', N'public@blog.net', N'PUBLIC@BLOG.NET', N'public@blog.net', N'PUBLIC@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEFoPta31y6W5gaHYmi0MpMr89upQNjfDqSG8KIllrCqKNNn6gV/xj0XSIDVXTss+nQ==', N'F2MKIMK2FXDPP65XHBMGNJW5YNS3XK4R', N'f70d1232-8855-49d2-b277-dd61f27f8108', N'123456', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUserRoles] ([UserId], [RoleId]) VALUES (N'5e816cea-7521-4d55-87b2-edecd3d72b60', N'c19e8d58-6852-48a6-ba76-a2afcec5bbae')
 GO
-INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'5d6148ab-9226-4d54-9229-83af8f5986e5', N'User', CAST(N'2022-04-23T00:22:41.6652510' AS DateTime2), CAST(N'2022-04-23T00:37:02.9191670' AS DateTime2), N'Writer', N'User', CAST(N'2000-01-01T00:00:00.0000000' AS DateTime2), N'Writer address', N'.', N'.', N'.', N'.', N'123456', N'writer@blog.net', N'WRITER@BLOG.NET', N'writer@blog.net', N'WRITER@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEHi6L/XhE9mOvoVbtOZRb/7bEScRMBwea+VXIUOggPSeg8B4kv1iJeCnbtYaSmV2DQ==', N'CLTTK3H7HOXBO3YVQBLBGCBEUDIULAMI', N'19b20094-8bab-4f2b-bc8e-5de94fd5b7aa', N'12346', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'5e816cea-7521-4d55-87b2-edecd3d72b60', N'User', CAST(N'2022-04-23T12:53:46.6776943' AS DateTime2), NULL, N'Admin', N'User', CAST(N'1900-01-01T00:00:00.0000000' AS DateTime2), N'.', N'.', N'.', N'.', N'.', N'123456', N'admin@blog.net', N'ADMIN@BLOG.NET', N'admin@blog.net', N'ADMIN@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEOOoj0b6A7zG1ceW36mW92wF9pL7BIaJVXtXP/7TNTwl1A9AcnBIBLNVdGT8LBhTpQ==', N'ANVNA62VEK57QI5DUQ225J6NSNAGPVUY', N'4b024c4c-c705-4f4f-a4ac-04606da22ae4', N'123456', 0, 0, NULL, 1, 0)
 GO
-INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'5db5d763-9197-4caf-b12d-981d92ab08e9', N'User', CAST(N'2022-04-23T00:24:36.6358534' AS DateTime2), CAST(N'2022-04-23T00:36:46.1872032' AS DateTime2), N'Editor', N'User', CAST(N'2000-01-01T00:00:00.0000000' AS DateTime2), N'Editor address', N'.', N'.', N'.', N'.', N'123456', N'editor@blog.net', N'EDITOR@BLOG.NET', N'editor@blog.net', N'EDITOR@BLOG.NET', 1, N'AQAAAAEAACcQAAAAECdU82bLDjYj57tFhkMsZchF2aBH0R2jKhEuzL5xkAJSYtZFfZDToD/YwhLHTMx0oQ==', N'PGIPBQZVJ5AZ3PIOLSOWWIQ3FMR2NSSL', N'64a52819-7d50-41e0-bf19-80d443c92869', N'123456', 0, 0, NULL, 1, 0)
+INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'7b29b2f9-c7b9-443c-8622-169cf756ba03', N'User', CAST(N'2022-04-23T16:46:36.5016260' AS DateTime2), CAST(N'2022-04-23T16:50:18.6307097' AS DateTime2), N'Editor', N'User', CAST(N'1900-01-01T00:00:00.0000000' AS DateTime2), N'.', N'.', N'.', N'.', N'.', N'123456', N'editor@blog.net', N'EDITOR@BLOG.NET', N'editor@blog.net', N'EDITOR@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEHeRvmQH4HI9VovS2z0eIOxf2vrmuwf9JkrhJ+tN4CIAJo0Ayzo9QjlsRsBd5mkNVw==', N'CYUSU4H4Q2LIKV2YV6RLWREBCZ7J23VZ', N'f00ab19e-54ab-4d8b-905b-1cb75d3c59d9', N'123456', 0, 0, NULL, 1, 0)
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'c58cfa54-819b-41bd-81da-ff671b9504e4', N'User', CAST(N'2022-04-23T16:48:40.3349882' AS DateTime2), NULL, N'Public', N'User', CAST(N'1900-01-01T00:00:00.0000000' AS DateTime2), N'.', N'.', N'.', N'.', N'.', N'123456', N'public@blog.net', N'PUBLIC@BLOG.NET', N'public@blog.net', N'PUBLIC@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEJBeQFuRDNoeHByPjqFrEIdf//hJhMT6BntCRjPB0htUR8foEX8qQG7t0RI8HkQsWw==', N'MM34L3FLUAIG5RBNT3XDZRF3HQEOZ2OF', N'11f57734-5b29-4466-a117-5d8322ea59ee', N'123456', 0, 0, NULL, 1, 0)
+GO
+INSERT [dbo].[AspNetUsers] ([Id], [Discriminator], [CreatedDate], [UpdatedDate], [FirstName], [LastName], [Birthday], [Address], [City], [State], [Country], [PostalCode], [MobilePhone], [UserName], [NormalizedUserName], [Email], [NormalizedEmail], [EmailConfirmed], [PasswordHash], [SecurityStamp], [ConcurrencyStamp], [PhoneNumber], [PhoneNumberConfirmed], [TwoFactorEnabled], [LockoutEnd], [LockoutEnabled], [AccessFailedCount]) VALUES (N'e8c7d071-68b0-416e-9251-645557e49582', N'User', CAST(N'2022-04-23T12:55:33.1810276' AS DateTime2), CAST(N'2022-04-23T12:58:52.4108618' AS DateTime2), N'Writer', N'User', CAST(N'1900-01-01T00:00:00.0000000' AS DateTime2), N'.', N'.', N'.', N'.', N'.', N'123456', N'writer@blog.net', N'WRITER@BLOG.NET', N'writer@blog.net', N'WRITER@BLOG.NET', 1, N'AQAAAAEAACcQAAAAEK9EVvOiE5xb76UVp8G7C2HkoxdNK+232L3MzEdnmTSH1hDi+ben+k4BMBW99I8Xyw==', N'A5V5F6CVOC26IGHQ6SMQ6RIDJAZEDLVV', N'3c867852-dbc5-49cb-9022-cca327b10a1a', N'123456', 0, 0, NULL, 1, 0)
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_AspNetRoleClaims_RoleId]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [IX_AspNetRoleClaims_RoleId]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE NONCLUSTERED INDEX [IX_AspNetRoleClaims_RoleId] ON [dbo].[AspNetRoleClaims]
 (
 	[RoleId] ASC
@@ -303,7 +307,7 @@ CREATE NONCLUSTERED INDEX [IX_AspNetRoleClaims_RoleId] ON [dbo].[AspNetRoleClaim
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [RoleNameIndex]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [RoleNameIndex]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [RoleNameIndex] ON [dbo].[AspNetRoles]
 (
 	[NormalizedName] ASC
@@ -313,7 +317,7 @@ WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNOR
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_AspNetUserClaims_UserId]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [IX_AspNetUserClaims_UserId]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE NONCLUSTERED INDEX [IX_AspNetUserClaims_UserId] ON [dbo].[AspNetUserClaims]
 (
 	[UserId] ASC
@@ -321,7 +325,7 @@ CREATE NONCLUSTERED INDEX [IX_AspNetUserClaims_UserId] ON [dbo].[AspNetUserClaim
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_AspNetUserLogins_UserId]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [IX_AspNetUserLogins_UserId]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE NONCLUSTERED INDEX [IX_AspNetUserLogins_UserId] ON [dbo].[AspNetUserLogins]
 (
 	[UserId] ASC
@@ -329,7 +333,7 @@ CREATE NONCLUSTERED INDEX [IX_AspNetUserLogins_UserId] ON [dbo].[AspNetUserLogin
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_AspNetUserRoles_RoleId]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [IX_AspNetUserRoles_RoleId]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE NONCLUSTERED INDEX [IX_AspNetUserRoles_RoleId] ON [dbo].[AspNetUserRoles]
 (
 	[RoleId] ASC
@@ -337,7 +341,7 @@ CREATE NONCLUSTERED INDEX [IX_AspNetUserRoles_RoleId] ON [dbo].[AspNetUserRoles]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [EmailIndex]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [EmailIndex]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE NONCLUSTERED INDEX [EmailIndex] ON [dbo].[AspNetUsers]
 (
 	[NormalizedEmail] ASC
@@ -345,7 +349,7 @@ CREATE NONCLUSTERED INDEX [EmailIndex] ON [dbo].[AspNetUsers]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [UserNameIndex]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [UserNameIndex]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 (
 	[NormalizedUserName] ASC
@@ -353,7 +357,7 @@ CREATE UNIQUE NONCLUSTERED INDEX [UserNameIndex] ON [dbo].[AspNetUsers]
 WHERE ([NormalizedUserName] IS NOT NULL)
 WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-/****** Object:  Index [IX_Comments_PostId]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [IX_Comments_PostId]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE NONCLUSTERED INDEX [IX_Comments_PostId] ON [dbo].[Comments]
 (
 	[PostId] ASC
@@ -361,16 +365,20 @@ CREATE NONCLUSTERED INDEX [IX_Comments_PostId] ON [dbo].[Comments]
 GO
 SET ANSI_PADDING ON
 GO
-/****** Object:  Index [IX_Posts_Title_UserId]    Script Date: 22/4/2022 23:55:59 ******/
+/****** Object:  Index [IX_Posts_Title_UserId]    Script Date: 23/4/2022 16:51:22 ******/
 CREATE UNIQUE NONCLUSTERED INDEX [IX_Posts_Title_UserId] ON [dbo].[Posts]
 (
 	[Title] ASC,
 	[UserId] ASC
 )WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, IGNORE_DUP_KEY = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
-ALTER TABLE [dbo].[AspNetUsers] ADD  DEFAULT (N'') FOR [Discriminator]
+SET ANSI_PADDING ON
 GO
-ALTER TABLE [dbo].[Comments] ADD  DEFAULT (N'') FOR [UserId]
+/****** Object:  Index [IX_Posts_UserId]    Script Date: 23/4/2022 16:51:22 ******/
+CREATE NONCLUSTERED INDEX [IX_Posts_UserId] ON [dbo].[Posts]
+(
+	[UserId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, SORT_IN_TEMPDB = OFF, DROP_EXISTING = OFF, ONLINE = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
 GO
 ALTER TABLE [dbo].[AspNetRoleClaims]  WITH CHECK ADD  CONSTRAINT [FK_AspNetRoleClaims_AspNetRoles_RoleId] FOREIGN KEY([RoleId])
 REFERENCES [dbo].[AspNetRoles] ([Id])
@@ -413,6 +421,12 @@ REFERENCES [dbo].[Posts] ([Id])
 ON DELETE CASCADE
 GO
 ALTER TABLE [dbo].[Comments] CHECK CONSTRAINT [FK_Comments_Posts_PostId]
+GO
+ALTER TABLE [dbo].[Posts]  WITH CHECK ADD  CONSTRAINT [FK_Posts_AspNetUsers_UserId] FOREIGN KEY([UserId])
+REFERENCES [dbo].[AspNetUsers] ([Id])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Posts] CHECK CONSTRAINT [FK_Posts_AspNetUsers_UserId]
 GO
 USE [master]
 GO

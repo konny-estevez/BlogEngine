@@ -11,7 +11,7 @@ namespace Entities
         /// <summary>
         /// Gets or sets the content
         /// </summary>
-        [Required,StringLength(1024)]
+        [Required,StringLength(1024), Column(TypeName = "varchar(1024)")]
         public string Content { get; set; }
 
         /// <summary>
@@ -28,7 +28,7 @@ namespace Entities
         /// <summary>
         /// Gets or sets the post Id
         /// </summary>
-        [ForeignKey("FK_UserId")]
+        [ForeignKey("FK_UserId"), Column(TypeName = "varchar(64)")]
         public string UserId { get; set; }
     }
 }

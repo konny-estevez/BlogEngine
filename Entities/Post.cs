@@ -13,13 +13,13 @@ namespace Entities
         /// <summary>
         /// Gets or sets the title
         /// </summary>
-        [Required, StringLength(50)]
+        [Required, StringLength(50), Column(TypeName = "varchar(50)")]
         public string Title { get; set; }
 
         /// <summary>
         /// Gets or sets the content
         /// </summary>
-        [Required, StringLength(1024)]
+        [Required, StringLength(1024), Column(TypeName = "varchar(1024)")]
         public string Content { get; set; }
 
         /// <summary>
@@ -35,7 +35,7 @@ namespace Entities
         /// <summary>
         /// Gets or sets the user Id
         /// </summary>
-        [ForeignKey("FK_User")]
+        [ForeignKey("FK_User"), Column(TypeName = "varchar(64)")]
         public string UserId { get; set; }
 
         /// <summary>
