@@ -13,6 +13,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Sql Scripts", "Sql Scripts"
 	ProjectSection(SolutionItems) = preProject
 		SqlScripts\Database.sql = SqlScripts\Database.sql
 		MySqlDatabase.sql = MySqlDatabase.sql
+		Roles_Users.sql = Roles_Users.sql
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Domain", "Domain", "{9BA06AA9-F2D5-4BFF-977D-071B4F16D691}"
